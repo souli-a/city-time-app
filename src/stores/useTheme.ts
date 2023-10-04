@@ -2,9 +2,9 @@ import { create } from 'zustand';
 
 const themes = ['dark', 'light', ''] as const;
 
-export type Theme = (typeof themes)[number];
+type Theme = (typeof themes)[number];
 
-export type TypeThemeStore = {
+type TypeThemeStore = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
 };
@@ -14,4 +14,4 @@ const useTheme = create<TypeThemeStore>((set) => ({
   setTheme: (theme) => set({ theme }),
 }));
 
-export { useTheme };
+export { useTheme, type Theme };

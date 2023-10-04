@@ -10,7 +10,7 @@ const cities = [
   '',
 ] as const;
 
-export type City = (typeof cities)[number];
+type City = (typeof cities)[number];
 
 type TypeCityStore = {
   city: City;
@@ -22,4 +22,4 @@ const useCity = create<TypeCityStore>((set) => ({
   setCity: (city) => set({ city }),
 }));
 
-export { useCity };
+export { useCity, type City };
