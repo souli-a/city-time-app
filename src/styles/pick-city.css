@@ -1,0 +1,15 @@
+.pick-city-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-low);
+  font-size: var(--font-size-button);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing-low);
+  text-align: center;
+}
+
+.pick-city-container > * {
+  flex: 1;
+  padding: var(--padding-button);
+  cursor: pointer;
+}
