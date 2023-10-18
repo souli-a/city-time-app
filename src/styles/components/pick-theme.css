@@ -15,3 +15,9 @@
   gap: var(--gap-low);
   flex-wrap: wrap;
 }
+
+@media (max-width: 450px) {
+  .pick-theme-container-title {
+    font-size: var(--title-font-size-under-450);
+  }
+}

@@ -1,7 +1,7 @@
 .button {
   border-radius: 1rem;
   padding: 1rem 1.5rem;
-  font-size: 2rem;
+  font-size: var(--button-font-size);
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -64,4 +64,10 @@
 .selected-item-dark:hover {
   background-color: var(--white-1);
   border: solid 0.2rem var(--white-1);
+}
+
+@media (max-width: 450px) {
+  .button {
+    font-size: var(--button-font-size-under-450);
+  }
 }

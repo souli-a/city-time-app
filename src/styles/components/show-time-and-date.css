@@ -36,3 +36,12 @@
 .time-and-date-content-dark {
   border: 0.3rem solid var(--white-1);
 }
+
+@media (max-width: 450px) {
+  .current-date-and-time {
+    font-size: 2.5rem;
+  }
+  .time-and-date-title {
+    font-size: var(--title-font-size-under-450);
+  }
+}

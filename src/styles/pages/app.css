@@ -21,3 +21,13 @@
   background-color: var(--black-1);
   color: var(--white-1);
 }
+
+@media (max-width: 450px) {
+  .app-container {
+    padding: var(--padding-under-450);
+  }
+
+  .app-container-content {
+    gap: var(--gap-mid-under-450);
+  }
+}
