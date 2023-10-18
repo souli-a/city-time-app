@@ -1,0 +1,23 @@
+.app-container {
+  display: flex;
+  flex-grow: 1;
+  padding: var(--padding-mid);
+  transition: var(--transition);
+}
+
+.app-container-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: var(--gap-mid);
+}
+
+.app-container-light {
+  background-color: var(--white-1);
+  color: var(--black-1);
+}
+
+.app-container-dark {
+  background-color: var(--black-1);
+  color: var(--white-1);
+}

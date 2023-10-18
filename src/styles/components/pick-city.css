@@ -1,0 +1,17 @@
+.pick-city-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-low);
+}
+
+.pick-city-container-title {
+  font-size: var(--title-font-size);
+  font-weight: var(--title-font-weight);
+  letter-spacing: var(--title-letter-spacing);
+}
+
+.all-cities-buttons {
+  display: flex;
+  gap: var(--gap-low);
+  flex-wrap: wrap;
+}

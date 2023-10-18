@@ -5,7 +5,7 @@ import PickTheme from '../components/PickTheme';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import useTimeAndDate from '../stores/useTimeAndDate';
 import { useTheme } from '../stores/useTheme';
-import '../styles/app.css';
+import '../styles/pages/app.css';
 
 const App = () => {
   const { time } = useTimeAndDate();
@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <div className={containerClassNameTheme}>
-      <div className="container-centered">
+      <div className="app-container-content">
         <PickCity />
         <PickLanguage />
         <PickTheme />

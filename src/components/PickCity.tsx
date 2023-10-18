@@ -1,64 +1,78 @@
-import useLocalStorage from '../hooks/useLocalStorage';
+import useLocalStorage, { State } from '../hooks/useLocalStorage';
 import { useTheme } from '../stores/useTheme';
 import { useCity } from '../stores/useCity';
-import '../styles/pick-city.css';
+import { useLanguage } from '../stores/useLanguage';
+import Button from './ui/Button';
+import '../styles/components/pick-city.css';
 
 const PickCity = () => {
   const { city, setCity } = useCity();
   const { theme } = useTheme();
+  const { language } = useLanguage();
 
   useLocalStorage({
-    setter: setCity,
+    setter: setCity as (state: State) => void,
     localStorageItemName: 'city',
-    valueToSave: city,
+    state: city,
   });
 
-  const containerClassNameTheme =
-    theme === 'light'
-      ? 'pick-city-container container-light'
-      : 'pick-city-container container-dark';
+  const buttonThemeClassName = (pickedCity: string) => {
+    if (theme === 'light' && pickedCity === city) {
+      return 'button button-basic-light selected-item-light';
+    } else if (theme === 'dark' && pickedCity === city) {
+      return 'button button-basic-dark selected-item-dark';
+    } else if (theme === 'light' && pickedCity !== city) {
+      return 'button button-basic-light';
+    } else if (theme === 'dark' && pickedCity !== city) {
+      return 'button button-basic-dark';
+    } else {
+      return '';
+    }
+  };
 
-  const buttonClassNameTheme =
-    theme === 'light' ? 'button-active-light' : 'button-active-dark';
+  const pickCityTitleContent = language === 'fr-FR' ? 'Villes' : 'Cities';
 
   return (
-    <div className={containerClassNameTheme}>
-      <button
-        className={city === 'America/New_York' ? buttonClassNameTheme : ''}
-        onClick={() => setCity('America/New_York')}
-      >
-        new-york
-      </button>
-      <button
-        className={city === 'America/Los_Angeles' ? buttonClassNameTheme : ''}
-        onClick={() => setCity('America/Los_Angeles')}
-      >
-        los angeles
-      </button>
-      <button
-        className={city === 'Europe/Paris' ? buttonClassNameTheme : ''}
-        onClick={() => setCity('Europe/Paris')}
-      >
-        paris
-      </button>
-      <button
-        className={city === 'Asia/Dubai' ? buttonClassNameTheme : ''}
-        onClick={() => setCity('Asia/Dubai')}
-      >
-        dubaï
-      </button>
-      <button
-        className={city === 'Asia/Hong_Kong' ? buttonClassNameTheme : ''}
-        onClick={() => setCity('Asia/Hong_Kong')}
-      >
-        hong-kong
-      </button>
-      <button
-        className={city === 'Asia/Seoul' ? buttonClassNameTheme : ''}
-        onClick={() => setCity('Asia/Seoul')}
-      >
-        seoul
-      </button>
+    <div className="pick-city-container">
+      <h1 className="pick-city-container-title">{pickCityTitleContent}</h1>
+      <div className="all-cities-buttons">
+        <Button
+          className={buttonThemeClassName('America/New_York')}
+          onClick={() => setCity('America/New_York')}
+        >
+          New York
+        </Button>
+        <Button
+          className={buttonThemeClassName('America/Los_Angeles')}
+          onClick={() => setCity('America/Los_Angeles')}
+        >
+          Los Angeles
+        </Button>
+        <Button
+          className={buttonThemeClassName('Europe/Paris')}
+          onClick={() => setCity('Europe/Paris')}
+        >
+          Paris
+        </Button>
+        <Button
+          className={buttonThemeClassName('Asia/Dubai')}
+          onClick={() => setCity('Asia/Dubai')}
+        >
+          Dubaï
+        </Button>
+        <Button
+          className={buttonThemeClassName('Asia/Hong_Kong')}
+          onClick={() => setCity('Asia/Hong_Kong')}
+        >
+          Hong Kong
+        </Button>
+        <Button
+          className={buttonThemeClassName('Asia/Seoul')}
+          onClick={() => setCity('Asia/Seoul')}
+        >
+          Seoul
+        </Button>
+      </div>
     </div>
   );
 };

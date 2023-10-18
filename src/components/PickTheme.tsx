@@ -1,41 +1,51 @@
-import useLocalStorage from '../hooks/useLocalStorage';
+import useLocalStorage, { State } from '../hooks/useLocalStorage';
 import { useTheme } from '../stores/useTheme';
-import '../styles/pick-theme.css';
+import { useLanguage } from '../stores/useLanguage';
+import '../styles/components/pick-theme.css';
 
 const PickLanguage = () => {
   const { theme, setTheme } = useTheme();
+  const { language } = useLanguage();
 
   useLocalStorage({
-    setter: setTheme,
+    setter: setTheme as (state: State) => void,
     localStorageItemName: 'theme',
-    valueToSave: theme,
+    state: theme,
   });
 
-  const containerClassNameTheme =
+  const buttonLightThemeClassName =
     theme === 'light'
-      ? 'pick-theme-container container-light'
-      : 'pick-theme-container container-dark';
+      ? 'button button-basic-light selected-item-light'
+      : 'button button-basic-dark';
 
-  const buttonClassNameThemeLight =
-    theme === 'light' ? 'button-active-light ' : '';
+  const buttonDarkThemeClassName =
+    theme === 'dark'
+      ? 'button button-basic-dark selected-item-dark'
+      : 'button button-basic-light';
 
-  const buttonClassNameThemeDark =
-    theme === 'dark' ? 'button-active-dark ' : '';
+  const pickThemeTitleContent = language === 'fr-FR' ? 'Thèmes' : 'Themes';
+
+  const buttonLightContent = language === 'fr-FR' ? 'Clair' : 'Light';
+
+  const buttonDarkContent = language === 'fr-FR' ? 'Sombre' : 'Dark';
 
   return (
-    <div className={containerClassNameTheme}>
-      <button
-        className={buttonClassNameThemeLight}
-        onClick={() => setTheme('light')}
-      >
-        light
-      </button>
-      <button
-        className={buttonClassNameThemeDark}
-        onClick={() => setTheme('dark')}
-      >
-        dark
-      </button>
+    <div className="pick-theme-container">
+      <div className="pick-theme-container-title">{pickThemeTitleContent}</div>
+      <div className="all-themes-buttons">
+        <button
+          className={buttonLightThemeClassName}
+          onClick={() => setTheme('light')}
+        >
+          {buttonLightContent}
+        </button>
+        <button
+          className={buttonDarkThemeClassName}
+          onClick={() => setTheme('dark')}
+        >
+          {buttonDarkContent}
+        </button>
+      </div>
     </div>
   );
 };

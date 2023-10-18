@@ -1,4 +1,4 @@
-function getTimeAndDate(city: string, language: string) {
+const getTimeAndDate = (city: string, language: string) => {
   const dateOptions: Intl.DateTimeFormatOptions = {
     day: 'numeric',
     month: 'numeric',
@@ -30,6 +30,6 @@ function getTimeAndDate(city: string, language: string) {
   };
 
   return timeAndDate;
-}
+};
 
 export default getTimeAndDate;

@@ -1,14 +1,16 @@
 import { useEffect } from 'react';
 import { useCity } from '../stores/useCity';
 import { useLanguage } from '../stores/useLanguage';
+import { useTheme } from '../stores/useTheme';
 import useTimeAndDate from '../stores/useTimeAndDate';
 import getTimeAndDate from '../utils/getTimeAndDate';
-import '../styles/show-time-and-date.css';
+import '../styles/components/show-time-and-date.css';
 
 const ShowTimeAndDate = () => {
   const { date, time, day, setDate, setTime, setDay } = useTimeAndDate();
   const { city } = useCity();
   const { language } = useLanguage();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (city && language) {
@@ -26,18 +28,31 @@ const ShowTimeAndDate = () => {
     }
   }, [city, language]);
 
+  const timeAndDateContentClassName =
+    theme === 'light'
+      ? 'time-and-date-content time-and-date-content-light'
+      : 'time-and-date-content time-and-date-content-dark';
+
+  const contentBeforeUserPick =
+    !city && language === 'en-US'
+      ? 'Pick a city.'
+      : !city && language === 'fr-FR'
+      ? 'Choisis une ville.'
+      : '';
+
+  const showTimeAndDateTitleContent =
+    language === 'fr-FR' ? 'Horaire & Date' : 'Time & Date';
+
   return (
     <div className="time-and-date-container">
-      <h1 className="current-date-and-time">
-        {!language || (!city && language === 'en-US')
-          ? 'pick a city, a language and a theme.'
-          : !language || (!city && language === 'fr-FR')
-          ? 'choisis une ville, un langage et un thème.'
-          : ''}
-      </h1>
-      <h1 className="current-date-and-time">{day ? day : ''}</h1>
-      <h1 className="current-date-and-time">{date ? date : ''}</h1>
-      <h1 className="current-date-and-time">{time ? time : ''}</h1>
+      <div className="time-and-date-title">{showTimeAndDateTitleContent}</div>
+      <div className={timeAndDateContentClassName}>
+        <h1 className="current-date-and-time">{contentBeforeUserPick}</h1>
+        <h1 className="current-date-and-time">{date}</h1>
+        <h1 className="current-date-and-time">
+          {day && time ? `${day} ─ ${time}` : ''}
+        </h1>
+      </div>
     </div>
   );
 };

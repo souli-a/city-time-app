@@ -1,0 +1,67 @@
+.button {
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  font-size: 2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  user-select: none;
+  text-align: center;
+  font-weight: 400;
+  transition: var(--transition);
+}
+
+.button-basic-light {
+  border: solid 0.2rem var(--white-2);
+}
+
+.button-basic-light:hover {
+  background-color: var(--white-2);
+  border: solid 0.2rem var(--white-2);
+}
+
+.button-basic-light:focus {
+  background-color: var(--black-1);
+  border: solid 0.2rem var(--black-1);
+  color: var(--white-1);
+}
+
+.selected-item-light {
+  background-color: var(--black-1);
+  border: solid 0.2rem var(--black-1);
+  color: var(--white-1);
+}
+
+.selected-item-light:hover {
+  background-color: var(--black-1);
+  border: solid 0.2rem var(--black-1);
+}
+
+.button-basic-dark {
+  border: solid 0.2rem var(--white-1);
+}
+
+.button-basic-dark:hover {
+  background-color: var(--white-2);
+  border: solid 0.2rem var(--white-2);
+  color: var(--black-1);
+}
+
+.button-basic-dark:focus {
+  background-color: var(--white-1);
+  border: solid 0.2rem var(--white-1);
+  color: var(--black-1);
+}
+
+.selected-item-dark {
+  background-color: var(--white-1);
+  border: solid 0.2rem var(--white-1);
+  color: var(--black-1);
+}
+
+.selected-item-dark:hover {
+  background-color: var(--white-1);
+  border: solid 0.2rem var(--white-1);
+}

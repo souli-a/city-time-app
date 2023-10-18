@@ -1,28 +1,56 @@
 import { useEffect } from 'react';
-import { City } from '../stores/useCity';
-import { Language } from '../stores/useLanguage';
 import { Theme } from '../stores/useTheme';
+import { Language } from '../stores/useLanguage';
+import { City } from '../stores/useCity';
+
+export type State = Language | Theme | City;
+
+type LocalStorageItemName = 'language' | 'theme' | 'city';
 
 interface UseLocalStorageProps {
-  setter: (valueToSave: any) => void;
-  localStorageItemName: 'language' | 'theme' | 'city';
-  valueToSave: City | Language | Theme;
+  setter: (state: State) => void;
+  localStorageItemName: LocalStorageItemName;
+  state: State;
 }
 
 const useLocalStorage = ({
   setter,
   localStorageItemName,
-  valueToSave,
-}: UseLocalStorageProps): null => {
+  state,
+}: UseLocalStorageProps) => {
   useEffect(() => {
-    const savedValue = localStorage.getItem(`${localStorageItemName}`);
-    if (savedValue && !valueToSave) {
-      setter(savedValue);
+    const localStorageValue = localStorage.getItem(
+      `${localStorageItemName}`
+    ) as State;
+
+    const browserTheme = window.matchMedia('(prefers-color-scheme: light)')
+      .matches
+      ? 'light'
+      : 'dark';
+
+    const browserLanguage =
+      navigator.language === 'fr' || navigator.language === 'fr-FR'
+        ? 'fr-FR'
+        : 'en-US';
+
+    if (state && state !== localStorageValue) {
+      localStorage.setItem(`${localStorageItemName}`, state);
     }
-    if (!savedValue || savedValue !== valueToSave) {
-      localStorage.setItem(`${localStorageItemName}`, valueToSave);
+
+    if (!state && localStorageValue) {
+      setter(localStorageValue);
     }
-  }, [valueToSave]);
+
+    if (localStorageItemName === 'theme' && !localStorageValue && !state) {
+      setter(browserTheme);
+      localStorage.setItem(`${localStorageItemName}`, browserTheme);
+    }
+
+    if (localStorageItemName === 'language' && !localStorageValue && !state) {
+      setter(browserLanguage);
+      localStorage.setItem(`${localStorageItemName}`, browserLanguage);
+    }
+  }, [state]);
 
   return null;
 };
